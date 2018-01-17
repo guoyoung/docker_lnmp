@@ -55,7 +55,7 @@ RUN cd /var/tmp/extend && \
     cd .. && \
     unzip rabbitmq-c-master.zip && \
     cd rabbitmq-c-master && \
-    ./configure --with-php-config=/usr/local/bin/php-config && \
+    ./configure --prefix=/usr/local/rabbitmq-c-0.7.1 && \
     make clean && \
     make && \
     make install && \
