@@ -23,7 +23,7 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	mkdir -p /var/tmp/extend && \
     ln -s /usr/lib64/libssl.so /usr/lib/
 
-COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz /var/tmp/extend/
+COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz ./extension/rabbitmq-c-master.zip /var/tmp/extend/
 RUN cd /var/tmp/extend && \
 #安装redis扩展
 	tar -zxf redis-3.1.2.tgz && \
@@ -51,6 +51,14 @@ RUN cd /var/tmp/extend && \
 	make clean && \
 	make && \
 	make install && \
+#安装rabbitmq-c扩展
+    cd .. && \
+    unzip rabbitmq-c-master.zip && \
+    cd rabbitmq-c-master && \
+    ./configure --with-php-config=/usr/local/bin/php-config && \
+    make clean && \
+    make && \
+    make install && \
 #安装amqp扩展
 	cd .. && \
 	tar -zxf amqp-1.9.3.tgz && \
