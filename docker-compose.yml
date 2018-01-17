@@ -1,0 +1,32 @@
+nginx:
+  image: nginx:1.13.7
+  container_name: nginx
+  ports:
+    - "18081:80"
+  net: "foo"
+  volumes:
+    - /home/docker-nginx-conf:/etc/nginx/conf.d
+    - /home/docker-html:/var/www/html
+mysql:
+  image: mysql:5.6.38
+  container_name: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=root
+  net: "foo"
+  volumes:
+    - /home/docker-data/mysql:/var/lib/mysql
+  ports:
+    - "13306:3306"
+redis:
+  image: redis:3.2.11
+  container_name: redis
+  volumes:
+    - /home/docker-data/redis:/data
+  net: "foo"
+php:
+  build: ./php
+  container_name: php
+  net: "foo"
+  volumes:
+    - /home/docker-html:/var/www/html
+
