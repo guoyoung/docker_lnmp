@@ -55,7 +55,7 @@ RUN cd /var/tmp/extend && \
     cd .. && \
     unzip rabbitmq-c-master.zip && \
     cd rabbitmq-c-master && \
-    ./configure --prefix=/usr/local/rabbitmq-c-0.7.1 && \
+    ./configure --prefix=/usr/local/rabbitmq-c && \
     make clean && \
     make && \
     make install && \
