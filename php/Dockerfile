@@ -79,7 +79,7 @@ RUN cd /var/tmp/extend && \
 	ldconfig && \
 #安装swoole扩展
 	cd .. && \
-	tar -zxf swoole-swoole-v1.9.23.zip && \
+	unzip swoole-swoole-v1.9.23.zip && \
 	cd swoole && \
 	phpize && \
 	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl && \
