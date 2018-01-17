@@ -23,7 +23,7 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	mkdir -p /var/tmp/extend && \
     ln -s /usr/lib64/libssl.so /usr/lib/
 
-COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz ./extension/rabbitmq-c-master.zip /var/tmp/extend/
+COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz ./extension/rabbitmq-c-0.8.0.tar.gz /var/tmp/extend/
 RUN cd /var/tmp/extend && \
 #安装redis扩展
 	tar -zxf redis-3.1.2.tgz && \
@@ -53,8 +53,8 @@ RUN cd /var/tmp/extend && \
 	make install && \
 #安装rabbitmq-c扩展
     cd .. && \
-    unzip rabbitmq-c-master.zip && \
-    cd rabbitmq-c-master && \
+    tar -zxf rabbitmq-c-0.8.0.tar.gz && \
+    cd rabbitmq-c-0.8.0 && \
     ./configure --prefix=/usr/local/rabbitmq-c && \
     make clean && \
     make && \
@@ -64,7 +64,7 @@ RUN cd /var/tmp/extend && \
 	tar -zxf amqp-1.9.3.tgz && \
 	cd amqp-1.9.3 && \
 	phpize && \
-	./configure --with-php-config=/usr/local/bin/php-config && \
+	./configure --with-php-config=/usr/local/bin/php-config --with-amqp --with-librabbitmq-dir=/usr/local/rabbitmq-c && \
 	make clean && \
 	make && \
 	make install && \
