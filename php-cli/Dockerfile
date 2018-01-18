@@ -1,6 +1,6 @@
 FROM php:7.1.12-cli
 
-COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
+COPY ./extension/redis-3.1.6.tgz ./extension/mongodb-1.3.4.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
 ./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-swoole-v1.9.23.zip \
 ./extension/igbinary-2.0.5.tgz ./extension/inotify-2.0.0.tgz /var/tmp/extend/
 
@@ -33,8 +33,8 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
     ln -s /usr/lib64/libssl.so /usr/lib/ && \
     cd /var/tmp/extend && \
 #安装redis扩展
-	tar -zxf redis-3.1.2.tgz && \
-	cd redis-3.1.2 && \
+	tar -zxf redis-3.1.6.tgz && \
+	cd redis-3.1.6 && \
 	phpize && \
 	./configure --with-php-config=/usr/local/bin/php-config && \
 	make clean && \
@@ -42,8 +42,8 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	make install && \
 #安装mongodb扩展
 	cd .. && \
-	tar -zxf mongodb-1.2.9.tgz && \
-	cd mongodb-1.2.9 && \
+	tar -zxf mongodb-1.3.4.tgz && \
+	cd mongodb-1.3.4 && \
 	phpize && \
 	./configure --with-php-config=/usr/local/bin/php-config && \
 	make clean && \
