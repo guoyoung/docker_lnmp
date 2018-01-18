@@ -103,7 +103,7 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
     make install && \
 #安装inotify扩展
     cd .. && \
-    unzip inotify-2.0.0.tgz && \
+    tar -zxf inotify-2.0.0.tgz && \
     cd inotify-2.0.0 && \
     phpize && \
     ./configure --with-php-config=/usr/local/bin/php-config && \
