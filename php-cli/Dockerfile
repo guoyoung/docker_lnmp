@@ -1,7 +1,8 @@
 FROM php:7.1.12-cli
 
 COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
-./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-swoole-v1.9.23.zip /var/tmp/extend/
+./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-swoole-v1.9.23.zip \
+./extension/igbinary-2.0.5.tgz ./extension/inotify-2.0.0.tgz /var/tmp/extend/
 
 RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
@@ -91,6 +92,24 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	make clean && \
 	make && \
 	make install && \
+#安装igbinary扩展
+    cd .. && \
+    tar -zxf igbinary-2.0.5.tgz && \
+    cd igbinary-2.0.5 && \
+    phpize && \
+    ./configure --with-php-config=/usr/local/bin/php-config && \
+    make clean && \
+    make && \
+    make install && \
+#安装inotify扩展
+    cd .. && \
+    unzip inotify-2.0.0.tgz && \
+    cd inotify-2.0.0 && \
+    phpize && \
+    ./configure --with-php-config=/usr/local/bin/php-config && \
+    make clean && \
+    make && \
+    make install && \
 #删除扩展安装包
 	cd /var/tmp && \
 	rm -rf extend
