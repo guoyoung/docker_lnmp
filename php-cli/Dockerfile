@@ -1,5 +1,8 @@
 FROM php:7.1.12-cli
 
+COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
+./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-swoole-v1.9.23.zip /var/tmp/extend/
+
 RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
 	sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list && \
@@ -25,12 +28,9 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	mkdir -p /var/run/sshd && \
     echo 'root:123' | chpasswd && \
     sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-    ln -s /usr/lib64/libssl.so /usr/lib/
-
-COPY ./extension/redis-3.1.2.tgz ./extension/mongodb-1.2.9.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
-./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-swoole-v1.9.23.zip /var/tmp/extend/
-RUN cd /var/tmp/extend && \
+    sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
+    ln -s /usr/lib64/libssl.so /usr/lib/ && \
+    cd /var/tmp/extend && \
 #安装redis扩展
 	tar -zxf redis-3.1.2.tgz && \
 	cd redis-3.1.2 && \
@@ -96,7 +96,6 @@ RUN cd /var/tmp/extend && \
 	rm -rf extend
 
 COPY ./conf/php.ini /usr/local/etc/php/php.ini
-COPY ./conf/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 22
 
