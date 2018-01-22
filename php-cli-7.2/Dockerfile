@@ -1,4 +1,4 @@
-FROM php:7.2.0-cli
+FROM php:7.1.12-cli
 
 COPY ./extension/redis-3.1.6.tgz ./extension/mongodb-1.3.4.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
 ./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-swoole-v1.9.23.zip \
@@ -21,7 +21,7 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
     openssl \
     libssl-dev \
 	supervisor \
-	libpng-dev \
+	libpng12-dev \
 	openssh-server \
     && docker-php-ext-install -j$(nproc) iconv mcrypt zip pdo_mysql bcmath\
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -87,8 +87,8 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	ldconfig && \
 #安装swoole扩展
 	cd .. && \
-	unzip swoole-swoole-v1.9.23.zip && \
-	cd swoole && \
+	unzip swoole-src-2.0.12.zip && \
+	cd swoole-src-2.0.12 && \
 	phpize && \
 	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl && \
 	make clean && \
