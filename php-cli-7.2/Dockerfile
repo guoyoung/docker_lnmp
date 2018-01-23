@@ -4,8 +4,6 @@ COPY ./extension/redis-3.1.6.tgz ./extension/mongodb-1.3.4.tgz ./extension/amqp-
 ./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-src-2.0.12.zip \
 ./extension/igbinary-2.0.5.tgz ./extension/inotify-2.0.0.tgz /var/tmp/extend/
 
-ENV SSH_ROOT_PASSWORD 123456
-
 RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
 	sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list && \
@@ -29,7 +27,7 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
     rm -rf /var/lib/apt/lists/* && \
 	mkdir -p /var/tmp/extend && \
 	mkdir -p /var/run/sshd && \
-    echo 'root:$SSH_ROOT_PASSWORD' | chpasswd && \
+    echo "root:123456" | chpasswd && \
     sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
     ln -s /usr/lib64/libssl.so /usr/lib/ && \
