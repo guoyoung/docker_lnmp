@@ -1,7 +1,7 @@
 FROM php:7.1.12-cli
 
 COPY ./extension/redis-3.1.6.tgz ./extension/mongodb-1.3.4.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
-./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-swoole-v1.9.23.zip \
+./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-src-2.0.12.zip \
 ./extension/igbinary-2.0.5.tgz ./extension/inotify-2.0.0.tgz /var/tmp/extend/
 
 ENV SSH_ROOT_PASSWORD 123456
