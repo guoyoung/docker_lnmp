@@ -88,7 +88,7 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	unzip swoole-src-2.0.12.zip && \
 	cd swoole-src-2.0.12 && \
 	phpize && \
-	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl && \
+	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl --enable-sockets --enable-coroutine && \
 	make clean && \
 	make && \
 	make install && \
