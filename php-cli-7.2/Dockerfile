@@ -88,19 +88,19 @@ RUN	apt-get update && apt-get install -y \
 	unzip swoole-src-2.0.12.zip && \
 	cd swoole-src-2.0.12 && \
 	phpize && \
-	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl --enable-coroutine && \  #--enable-sockets
+	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl && \  # --enable-sockets --enable-coroutine
 	make clean && \
 	make && \
 	make install && \
 #安装igbinary扩展
-    cd .. && \
-    tar -zxf igbinary-2.0.5.tgz && \
-    cd igbinary-2.0.5 && \
-    phpize && \
-    ./configure --with-php-config=/usr/local/bin/php-config && \
-    make clean && \
-    make && \
-    make install && \
+#    cd .. && \
+#    tar -zxf igbinary-2.0.5.tgz && \
+#    cd igbinary-2.0.5 && \
+#    phpize && \
+#    ./configure --with-php-config=/usr/local/bin/php-config && \
+#    make clean && \
+#    make && \
+#    make install && \
 #安装inotify扩展
     cd .. && \
     tar -zxf inotify-2.0.0.tgz && \
