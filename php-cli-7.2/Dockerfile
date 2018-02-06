@@ -83,12 +83,12 @@ RUN	apt-get update && apt-get install -y \
 	make install && \
 	ln -s /usr/local/lib/libhiredis.so.0.13 /usr/lib/libhiredis.so.0.13 && \
 	ldconfig && \
-#安装swoole扩展
+#安装swoole扩展  --enable-sockets --enable-coroutine --enable-openssl
 	cd .. && \
 	unzip swoole-src-2.0.12.zip && \
 	cd swoole-src-2.0.12 && \
 	phpize && \
-	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  && \  #--enable-sockets --enable-coroutine --enable-openssl
+	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  && \
 	make clean && \
 	make && \
 	make install && \
