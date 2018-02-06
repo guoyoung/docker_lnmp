@@ -88,7 +88,7 @@ RUN	apt-get update && apt-get install -y \
 	unzip swoole-src-2.0.12.zip && \
 	cd swoole-src-2.0.12 && \
 	phpize && \
-	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl --enable-sockets --enable-coroutine && \
+	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  --enable-openssl --enable-coroutine && \  #--enable-sockets
 	make clean && \
 	make && \
 	make install && \
