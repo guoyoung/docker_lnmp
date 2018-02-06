@@ -4,10 +4,10 @@ COPY ./extension/redis-3.1.6.tgz ./extension/mongodb-1.3.4.tgz ./extension/amqp-
 ./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-src-2.0.12.zip \
 ./extension/igbinary-2.0.5.tgz ./extension/inotify-2.0.0.tgz /var/tmp/extend/
 
-RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
-	sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
-	sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list && \
-	apt-get update && apt-get install -y \
+#RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
+#	sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
+#	sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list && \
+RUN	apt-get update && apt-get install -y \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
 	libmcrypt-dev \
