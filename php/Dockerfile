@@ -6,7 +6,6 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	apt-get update && apt-get install -y \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
-	libmcrypt-dev \
 	curl\
 	libcurl4-gnutls-dev \
 	libxml2-dev \
@@ -16,7 +15,7 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
     libssl-dev \
 	supervisor \
 	libpng-dev \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt zip pdo_mysql bcmath\
+    && docker-php-ext-install -j$(nproc) iconv zip pdo_mysql bcmath\
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd && \
     rm -rf /var/lib/apt/lists/* && \
