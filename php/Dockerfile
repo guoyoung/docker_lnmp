@@ -2,6 +2,7 @@ FROM php:fpm
 
 RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
 	sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
+	sed -i "s/security.ubuntu.com/mirrors.aliyun.com/g" /etc/apt/sources.list && \
 	apt-get update && apt-get install -y \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
