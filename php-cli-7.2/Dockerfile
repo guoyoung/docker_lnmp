@@ -16,7 +16,7 @@ RUN	apt-get update && apt-get install -y \
     openssl \
     libssl-dev \
 	supervisor \
-	libpng12-dev \
+	libpng-dev \
 	openssh-server \
     && docker-php-ext-install -j$(nproc) iconv mcrypt zip pdo_mysql bcmath\
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
