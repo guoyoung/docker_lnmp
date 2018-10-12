@@ -25,7 +25,7 @@ RUN	apt-get update && apt-get install -y \
 	mkdir -p /var/tmp/extend && \
 	mkdir -p /var/run/sshd && \
     echo "root:123456" | chpasswd && \
-    sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
     ln -s /usr/lib64/libssl.so /usr/lib/ && \
     cd /var/tmp/extend && \
