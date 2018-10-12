@@ -46,15 +46,6 @@ RUN	apt-get update && apt-get install -y \
 	make clean && \
 	make && \
 	make install && \
-#安装solr扩展
-	cd .. && \
-	tar -zxf solr-2.4.0.tgz && \
-	cd solr-2.4.0 && \
-	phpize && \
-	./configure --with-php-config=/usr/local/bin/php-config && \
-	make clean && \
-	make && \
-	make install && \
 #安装rabbitmq-c扩展
     cd .. && \
     tar -zxf rabbitmq-c-0.8.0.tar.gz && \
