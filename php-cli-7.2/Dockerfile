@@ -18,7 +18,7 @@ RUN	apt-get update && apt-get install -y \
 	supervisor \
 	libpng-dev \
 	openssh-server \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt zip pdo_mysql bcmath\
+    && docker-php-ext-install -j$(nproc) iconv zip pdo_mysql bcmath\
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd && \
     rm -rf /var/lib/apt/lists/* && \
