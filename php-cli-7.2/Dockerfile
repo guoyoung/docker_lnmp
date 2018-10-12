@@ -1,12 +1,9 @@
-FROM php:7.1.12-cli
+FROM php:7.2-cli
 
-COPY ./extension/redis-3.1.6.tgz ./extension/mongodb-1.3.4.tgz ./extension/amqp-1.9.3.tgz ./extension/solr-2.4.0.tgz \
-./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-src-2.0.12.zip \
-./extension/igbinary-2.0.5.tgz ./extension/inotify-2.0.0.tgz /var/tmp/extend/
+COPY ./extension/redis-4.1.1.tgz ./extension/mongodb-1.5.3.tgz ./extension/amqp-1.9.3.tgz \
+./extension/rabbitmq-c-0.8.0.tar.gz ./extension/hiredis-0.13.3.tar.gz ./extension/swoole-src-4.2.1.zip \
+./extension/igbinary-2.0.7.tgz ./extension/inotify-2.0.0.tgz /var/tmp/extend/
 
-#RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list && \
-#	sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list && \
-#	sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list && \
 RUN	apt-get update && apt-get install -y \
 	libfreetype6-dev \
 	libjpeg62-turbo-dev \
@@ -33,8 +30,8 @@ RUN	apt-get update && apt-get install -y \
     ln -s /usr/lib64/libssl.so /usr/lib/ && \
     cd /var/tmp/extend && \
 #安装redis扩展
-	tar -zxf redis-3.1.6.tgz && \
-	cd redis-3.1.6 && \
+	tar -zxf redis-4.1.1.tgz && \
+	cd redis-4.1.1 && \
 	phpize && \
 	./configure --with-php-config=/usr/local/bin/php-config && \
 	make clean && \
@@ -42,8 +39,8 @@ RUN	apt-get update && apt-get install -y \
 	make install && \
 #安装mongodb扩展
 	cd .. && \
-	tar -zxf mongodb-1.3.4.tgz && \
-	cd mongodb-1.3.4 && \
+	tar -zxf mongodb-1.5.3.tgz && \
+	cd mongodb-1.5.3 && \
 	phpize && \
 	./configure --with-php-config=/usr/local/bin/php-config && \
 	make clean && \
@@ -85,22 +82,22 @@ RUN	apt-get update && apt-get install -y \
 	ldconfig && \
 #安装swoole扩展  --enable-sockets --enable-coroutine --enable-openssl
 	cd .. && \
-	unzip swoole-src-2.0.12.zip && \
-	cd swoole-src-2.0.12 && \
+	unzip swoole-src-4.2.1.zip && \
+	cd swoole-src-4.2.1 && \
 	phpize && \
 	./configure --with-php-config=/usr/local/bin/php-config --enable-async-redis  && \
 	make clean && \
 	make && \
 	make install && \
 #安装igbinary扩展
-#    cd .. && \
-#    tar -zxf igbinary-2.0.5.tgz && \
-#    cd igbinary-2.0.5 && \
-#    phpize && \
-#    ./configure --with-php-config=/usr/local/bin/php-config && \
-#    make clean && \
-#    make && \
-#    make install && \
+    cd .. && \
+    tar -zxf igbinary-2.0.7.tgz && \
+    cd igbinary-2.0.7 && \
+    phpize && \
+    ./configure --with-php-config=/usr/local/bin/php-config && \
+    make clean && \
+    make && \
+    make install && \
 #安装inotify扩展
     cd .. && \
     tar -zxf inotify-2.0.0.tgz && \
