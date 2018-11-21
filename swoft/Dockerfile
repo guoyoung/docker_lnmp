@@ -3,7 +3,7 @@ FROM php:7.2
 # Version
 ENV PHPREDIS_VERSION 4.0.0
 ENV HIREDIS_VERSION 0.13.3
-ENV SWOOLE_VERSION 4.2.28
+ENV SWOOLE_VERSION 4.2.8
 
 # Timezone
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -67,7 +67,7 @@ RUN wget https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz 
     && ( \
         cd swoole \
         && phpize \
-        && ./configure --enable-async-redis --enable-mysqlnd --enable-openssl --enable-http2 \
+        && ./configure --enable-mysqlnd --enable-openssl --enable-http2 \
         && make -j$(nproc) \
         && make install \
     ) \
@@ -77,7 +77,7 @@ RUN wget https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz 
 WORKDIR /var/www/swoft
 
 EXPOSE 80
-EXPOSE 20
+EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
 #ENTRYPOINT ["php", "/var/www/swoft/bin/swoft", "start"]
