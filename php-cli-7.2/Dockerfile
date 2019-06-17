@@ -41,12 +41,12 @@ RUN	apt-get update && apt-get install -y \
     make clean && \
     make && \
     make install && \
-#安装swoole扩展  --enable-sockets --enable-coroutine --enable-openssl
+#安装swoole扩展
     cd .. && \
     unzip swoole-src-4.3.5.zip && \
     cd swoole-src-4.3.5 && \
     phpize && \
-    ./configure --with-php-config=/usr/local/bin/php-config  && \
+    ./configure --with-php-config=/usr/local/bin/php-config --enable-openssl && \
     make clean && \
     make && \
     make install && \
