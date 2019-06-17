@@ -43,9 +43,6 @@ RUN	apt-get update && apt-get install -y \
     pecl install igbinary && \
 #安装inotify扩展
     pecl install inotify && \
-#删除扩展安装包
-	cd /var/tmp && \
-	rm -rf extend && \
 # Composer
     curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
