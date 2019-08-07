@@ -1,6 +1,6 @@
 FROM php:7.2
 
-ENV SWOOLE_VERSION 4.4.2
+ENV SWOOLE_VERSION 4.4.3
 
 RUN	apt-get update && apt-get install -y \
 	libfreetype6-dev \
