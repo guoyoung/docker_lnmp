@@ -1,6 +1,6 @@
 FROM php:7.2
 
-ENV SWOOLE_VERSION 4.4.7
+ENV SWOOLE_VERSION 4.4.12
 
 RUN	apt-get update && apt-get install -y \
 	libfreetype6-dev \
@@ -19,7 +19,7 @@ RUN	apt-get update && apt-get install -y \
 	supervisor \
 	libpng-dev \
 	openssh-server \
-    && docker-php-ext-install -j$(nproc) iconv zip pdo_mysql bcmath\
+    && docker-php-ext-install -j$(nproc) iconv zip pdo_mysql bcmath sockets\
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd && \
 	mkdir -p /var/run/sshd && \
@@ -34,7 +34,7 @@ RUN	apt-get update && apt-get install -y \
     && rm swoole.tar.gz && \
     cd swoole && \
     phpize && \
-    ./configure --with-php-config=/usr/local/bin/php-config --enable-openssl && \
+    ./configure --with-php-config=/usr/local/bin/php-config --enable-openssl  --enable-sockets && \
     make clean && \
     make && \
     make install && \
