@@ -9,5 +9,5 @@ mkdir -p $LOG_HOME
 ln -s /data/logs $LOG_HOME
 
 echo "" >>$LOG_HOME/gc.log
-java $JAVA_OPTS -jar /data/$JOB --server.port=$PORT
+java $JAVA_OPTS -jar /data/$JOB
 
