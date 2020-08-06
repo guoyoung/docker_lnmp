@@ -4,4 +4,4 @@ RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shang
 RUN mkdir -p $LOG_HOME && ln -s /data/logs $LOG_HOME
 RUN echo "" >>$LOG_HOME/gc.log
 WORKDIR /data
-ENTRYPOINT ["java","-Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -verbose:gc -Xloggc:$LOG_HOME/gc.log","-jar","/data/mqtt.jar"]
+ENTRYPOINT ["java","-verbose:gc -Xloggc:$LOG_HOME/gc.log","-jar","/data/mqtt.jar"]
