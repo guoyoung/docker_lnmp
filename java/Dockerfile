@@ -1,7 +1,7 @@
 FROM openjdk:8
-ENV JOB=mqtt.jar
 ENV LOG_HOME=/Users/gy/data/java/logs/wenyi/mqtt
-ADD ./run.sh /data
-RUN chmod a+x /data/run.sh
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
+RUN mkdir -p $LOG_HOME && ln -s /data/logs $LOG_HOME
+RUN echo "" >>$LOG_HOME/gc.log
 WORKDIR /data
-ENTRYPOINT sh /data/run.sh
+ENTRYPOINT ["java","-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=1 -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -verbose:gc -Xloggc:$LOG_HOME/gc.log","-jar","/data/mqtt.jar"]
